@@ -38,7 +38,7 @@ An object of the ```IO_File``` class has the following public member functions:
 ### Example
 There are 5 people.
 
-4 people's names are Alex, Anne, Mindy Marx.
+4 people's names are Alex, Anne, Mindy, and Marx.
 
 Alex has "Employee Id" of 1 and "Salary" of 1000.0.
 
@@ -46,7 +46,7 @@ We can use IO_File to store the above information as follows:
 
 #### Create IO_File object
 ```
-IO_File file
+IO_File file;
 ```
 
 #### Create nodes
@@ -167,7 +167,7 @@ file.SetAttribute<Bank>("Bank", n1, b1);
 ```
 
 #### Verification
-We add the following line into the ```Print(IO_File&)``` function to print the ```Bank``` object.
+We add the following lines into the ```Print(IO_File&)``` function to print the ```Bank``` object.
 ```
 if(file.GetAttribute("Bank", node, bank)) {
     std::cout << "└─ Bank Balance: " << bank.Balance() << std::endl;
@@ -240,7 +240,7 @@ file.SetAsParentChild(n1, n3);
 ```
 
 #### Verification
-We add the following lines to ```Print(IO_File&)``` to display children
+We add the following lines to ```Print(IO_File&)``` to display children.
 
 ```
 if(file.HasChildren(node)) {
