@@ -30,7 +30,7 @@ Stopwatch::TIMEPOINT Stopwatch::Stop(const std::string& segment_name, const bool
 	return stop_time;
 }
 
-void Stopwatch::Summary() {
+void Stopwatch::Summary() const {
 	for(auto it = segment_duration_map_.rbegin(); it != segment_duration_map_.rend(); ++it) {
 		std::cout << it->first << ": " << (it->second.count() / 1e6) << " seconds" << std::endl; 
 	}

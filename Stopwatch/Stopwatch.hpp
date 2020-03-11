@@ -20,7 +20,7 @@ public:
     /**
      * @brief Notes the start time against segment_name
      */ 
-    TIMEPOINT Start(const std::string& segement_name, const bool& announce = true);
+    TIMEPOINT Start(const std::string& segment_name, const bool& announce = true);
 
     /**
      * @brief Notes the stop time and store the duration using the start time
@@ -34,7 +34,7 @@ public:
     /**
      * @brief Prints all the segment_names and the cummulative durations recorded.
      */ 
-    void Summary();
+    void Summary() const;
 
     /**
      * @brief Clears all the recorded start times and durations.
