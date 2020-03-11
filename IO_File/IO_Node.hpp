@@ -4,6 +4,8 @@
 #include <utility>
 #include <stdint.h>
 
+#include "Globals.hpp"
+
 /**
  * @brief Class that user of IO_File would use to handle data in IO_File.
  * @author nsr
@@ -12,7 +14,7 @@ class IO_Node
 {
 public:
     IO_Node() noexcept = default;
-    IO_Node(uint64_t id)
+    IO_Node(io_file::Id id)
         : node_id_(id) {}
 
     ~IO_Node() = default;
@@ -40,12 +42,12 @@ public:
     friend bool operator == (const IO_Node& lhs, const IO_Node& rhs);
     friend bool operator != (const IO_Node& lhs, const IO_Node& rhs);
 
-    const uint64_t& GetId() const {
+    const io_file::Id& GetId() const {
         return node_id_;
     }
 
 private:
-    uint64_t node_id_;
+    io_file::Id node_id_;
 };
 
 #endif // IO_NODE_H

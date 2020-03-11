@@ -46,7 +46,7 @@ public:
      * @return true, if the manager has a record of a node with id node_id.
      * @return false, if the manager doesn't have a record of a node with id node_id.
      */
-    bool HasNode(const unsigned& node_id) override {
+    bool HasNode(const io_file::Id& node_id) override {
         return node_T_map_.find(node_id) != node_T_map_.end() ? true : false;
     }
 
@@ -55,7 +55,7 @@ public:
      * @param node_id Id of the node for which a new record is being created or existing record is being updated.
      * @param value, the value of the attribute the manager stores or updates corresponding to the node with id node_id.
      */
-    void AddNode(const unsigned& node_id, T value) {
+    void AddNode(const io_file::Id& node_id, T value) {
         node_T_map_[node_id] = value;
         return;
     }
@@ -66,7 +66,7 @@ public:
      * @return true, if the record of the node with id node_id existed.
      * @return false, if the record of the node with id node_id did not exist.
      */
-    bool RemoveNode(const unsigned& node_id) override {
+    bool RemoveNode(const io_file::Id& node_id) override {
         if (!HasNode(node_id)) return false;
         node_T_map_.erase(node_id);
         return true;
@@ -82,7 +82,7 @@ public:
      * @return true, if the record of the node with id node_id existed.
      * @return false, if the record of the node with id node_id did not exist.
      */
-    bool GetValue(const unsigned& node_id, T& getter) {
+    bool GetValue(const io_file::Id& node_id, T& getter) {
         getter = default_value_;
         if (!HasNode(node_id)) return false;
         getter = node_T_map_[node_id];
@@ -98,7 +98,7 @@ public:
     }
 
 private:
-    std::map<unsigned, T> node_T_map_;
+    std::map<io_file::Id, T> node_T_map_;
     T default_value_;
 };
 

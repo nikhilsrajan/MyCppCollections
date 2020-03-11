@@ -133,7 +133,7 @@ public:
      * @return false, if the record of the node with id node_id does not exist in the manager of the attribute by
      *         the name attribute, or if the attribute by the name attribute is not being managed.
      */
-    bool AttributeHasNode(std::string attribute, unsigned node_id) {
+    bool AttributeHasNode(std::string attribute, io_file::Id node_id) {
         if(!HasAttribute(attribute)) return false;
         return name_manager_map_[attribute]->HasNode(node_id);
     }
@@ -148,7 +148,7 @@ public:
      * @return false, if the data type of the attribute was incorrectly specified.
      */
     template<class T>
-    bool AddNodeToAttribute(std::string attribute, unsigned node_id, T value) {
+    bool AddNodeToAttribute(std::string attribute, io_file::Id node_id, T value) {
         if(!HasAttribute(attribute)) AddAttribute<T>(attribute);
         auto p = std::dynamic_pointer_cast<Attribute_Manager<T>>(name_manager_map_[attribute]);
         if(p == nullptr) return false;
@@ -168,7 +168,7 @@ public:
      *         for the attribute, or if the record of the node with id node_id doesn't exist in the attribute manager.
      */
     template<class T>
-    bool GetAttributeForNode(std::string attribute, unsigned node_id, T& getter) {
+    bool GetAttributeForNode(std::string attribute, io_file::Id node_id, T& getter) {
         if(!HasAttribute(attribute)) return false;
         auto p = std::dynamic_pointer_cast<Attribute_Manager<T>>(name_manager_map_[attribute]);
         if(p == nullptr) return false;
@@ -184,7 +184,7 @@ public:
      * @return false, if the attribute by the name attribute doesn't exist, or if the record of the node with id node_id
      *         doesn't exist in the attribute manager.
      */
-    bool RemoveNodeFromAttribute(std::string attribute, unsigned node_id) {
+    bool RemoveNodeFromAttribute(std::string attribute, io_file::Id node_id) {
         if(!HasAttribute(attribute)) return false;
         return name_manager_map_[attribute]->RemoveNode(node_id);
     }
@@ -193,7 +193,7 @@ public:
      * @brief Deletes the record of the node with id node_id from all the attribute managers.
      * @param node_id Id of the node whose record is being deleted from all the attribute managers.
      */
-    void RemoveNodeFromAllAttributes(unsigned node_id) {
+    void RemoveNodeFromAllAttributes(io_file::Id node_id) {
         for(auto it = name_manager_map_.begin(); it != name_manager_map_.end(); ++it)
             it->second->RemoveNode(node_id);
     }

@@ -1,6 +1,8 @@
 #ifndef ATTRIBUTE_MANAGER_INTERFACE_H
 #define ATTRIBUTE_MANAGER_INTERFACE_H
 
+#include "Globals.hpp"
+
 /**
  * @brief Abstract class for all attribute managers.
  * @author nsr
@@ -16,7 +18,7 @@ public:
      * @return true, if the attribute manager has the node with id node_id.
      * @return false, if the attribute manager doesn't have node with id node_id.
      */
-    virtual bool HasNode(const unsigned& node_id) = 0;
+    virtual bool HasNode(const io_file::Id& node_id) = 0;
 
     /**
      * @brief Removes node with id node_id from the attribute manager.
@@ -24,7 +26,7 @@ public:
      * @return true, if the node with id node_id was present in the attribute manager.
      * @return false, if the node with id node_id wasn't found in the attribute manager, and thus not removed.
      */
-    virtual bool RemoveNode(const unsigned& node_id) = 0;
+    virtual bool RemoveNode(const io_file::Id& node_id) = 0;
 };
 
 #endif // ATTRIBUTE_MANAGER_INTERFACE_H

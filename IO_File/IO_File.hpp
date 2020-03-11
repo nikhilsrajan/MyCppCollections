@@ -36,11 +36,12 @@ public:
     IO_File &operator = (IO_File &&lhs);
 
     IO_Node CreateIONode();
-    void DestroyIONode(IO_Node node);
+    void DestroyIONode(const IO_Node& node);
+
     // Returns vector of nodes without parents.
     std::vector<IO_Node> GetTopLevelNodes();
 
-    typedef std::map<uint64_t, IO_Node>::iterator iterator;
+    typedef std::map<io_file::Id, IO_Node>::iterator iterator;
 
     iterator begin() {
         return id_node_map_.begin();
@@ -60,7 +61,7 @@ public:
 
     // To check if the attribute exists in the IO_File
     // Returns true if it exists, else false.
-    bool AttributeExists(std::string attribute) {
+    bool AttributeExists(const std::string& attribute) {
         return attributes_manager_.HasAttribute(attribute);
     }
     // To create a new attribute
@@ -68,19 +69,19 @@ public:
     // Please note the attribute is type sensitive. This datatype cannot be changed,
     // unless the attribute is destoyed and recreated.
     template <class T>
-    bool CreateAttribute(std::string attribute, T default_value) {
+    bool CreateAttribute(const std::string& attribute, const T& default_value = T()) {
         return attributes_manager_.AddAttribute<T>(attribute, default_value);
     }
     // Removes the  attribute from the IO_File
     // Returns true if the  attribute previously existed, else false.
-    bool DestroyAttribute(std::string attribute) {
+    bool DestroyAttribute(const std::string& attribute) {
         return attributes_manager_.RemoveAttribute(attribute);
     }
     // Updates the default value for a  attibute
     // Returns true if the attribute exists and the datatype is
     // specified correctly, else false.
     template <class T>
-    bool SetDefaultValueForAttribute(std::string attribute, T default_value) {
+    bool SetDefaultValueForAttribute(const std::string& attribute, const T& default_value) {
         return attributes_manager_.SetDefaultValueForAttribute<T>(attribute, default_value);
     }
     // Returns a vector of pair of strings (attribute name, attribute type).
@@ -88,12 +89,12 @@ public:
         return attributes_manager_.GetAttributesList();
     }
     // Returns the attribute type as a string.
-    bool GetAttributeType(std::string attribute, std::string& getter) {
+    bool GetAttributeType(const std::string& attribute, std::string& getter) {
         return attributes_manager_.GetTypeForAttribute(attribute, getter);
     }
     // To check if a given node has the given  attribute.
     // Returns true if the attribute exists and the node has the attribute, else false.
-    bool HasAttribute(std::string attribute, IO_Node node) {
+    bool HasAttribute(const std::string& attribute, const IO_Node& node) {
         return attributes_manager_.AttributeHasNode(attribute, node.GetId());
     }
     // To add a  attribute to the given node.
@@ -102,30 +103,30 @@ public:
     // If the attribute doesn't already exist, the attribute would be created. The datatype
     // then specified would be fixed for the attribute. It cannot be changed later.
     template <class T>
-    bool AddAttribute(std::string attribute, IO_Node node, T value) {
+    bool AddAttribute(const std::string& attribute, const IO_Node& node, T value) {
         return attributes_manager_.AddNodeToAttribute(attribute, node.GetId(), value);
     }
     // Gets the value of the  attribute for a given node.
     // Returns true if the attribute exists and the node has the attribute and the datatype of the
     // attribute was correctly specified. Else false.
     template<class T>
-    bool GetAttribute(std::string attribute, IO_Node node, T& getter) {
+    bool GetAttribute(const std::string& attribute, const IO_Node& node, T& getter) {
         return attributes_manager_.GetAttributeForNode(attribute, node.GetId(), getter);
     }
     // Removes the  attribute from the node.
     // Returns true if the attribute exists, else false.
-    bool RemoveAttribute(std::string attribute, IO_Node node) {
+    bool RemoveAttribute(const std::string& attribute, const IO_Node& node) {
         return attributes_manager_.RemoveNodeFromAttribute(attribute, node.GetId());
     }
 
 
 private:
-    uint64_t next_node_id_;
-    std::map<uint64_t, IO_Node> id_node_map_;
+    io_file::Id next_node_id_;
+    std::map<io_file::Id, IO_Node> id_node_map_;
 
     Attributes_Manager attributes_manager_;
 
-    uint64_t AssignId_();
+    io_file::Id AssignId_();
     void RemoveIONodeFromHierarchy_(const IO_Node& node);
 };
 

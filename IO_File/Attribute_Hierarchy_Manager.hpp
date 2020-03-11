@@ -5,6 +5,8 @@
 #include <map>
 #include <algorithm>
 
+#include "Globals.hpp"
+
 /**
  * @brief Attribute manager to handle hierarchy information, which node is parent to which node.
  *        This relation noted using the unique id of the nodes stored in a multimap.
@@ -37,14 +39,14 @@ public:
      * @param parent_id Id of the node being set as parent.
      * @param child_id Id of the node being set as child.
      */
-    void SetAsParentChild(const unsigned& parent_id, const unsigned& child_id);
+    void SetAsParentChild(const io_file::Id& parent_id, const io_file::Id& child_id);
 
     /**
      * @brief Removes the parent-child relationship recorded for nodes with ids parent_id and child_id.
      * @param parent_id Id of the node being removed as parent.
      * @param child_id Id of hte node being removed as child.
      */
-    void RemoveAsParentChild(const unsigned& parent_id, const unsigned& child_id);
+    void RemoveAsParentChild(const io_file::Id& parent_id, const io_file::Id& child_id);
 
     /**
      * @brief Checks if the given node with id node_id has any children.
@@ -54,7 +56,7 @@ public:
      * @return true, if the node with id node_id has at least one child.
      * @return false, if the node with id node_id has no children.
      */
-    bool HasChildren(const unsigned& node_id);
+    bool HasChildren(const io_file::Id& node_id);
 
     /**
      * @brief Checks if the given node with id node_id has a parent.
@@ -64,30 +66,30 @@ public:
      * @return true, if the node with id node_id has a parent.
      * @return false, if the node with id node_id has no parent.
      */
-    bool HasParent(const unsigned& node_id);
+    bool HasParent(const io_file::Id& node_id);
 
     /**
      * @brief Get all the children of the give node with id node_id as a vector of ids.
      * @param node_id Id of the node whose list of children is being returned.
-     * @return vector of unsigned integers, vector of ids of nodes who are children of node with id node_id.
+     * @return vector of io_file::Id integers, vector of ids of nodes who are children of node with id node_id.
      */
-    std::vector<unsigned> GetChildren(const unsigned& node_id);
+    std::vector<io_file::Id> GetChildren(const io_file::Id& node_id);
 
     /**
     * @brief Get all the parents of the give node with id node_id as a vector of ids.
     * @param node_id Id of the node whose list of parents is being returned.
-    * @return vector of unsigned integers, vector of ids of nodes who are parents of node with id node_id.
+    * @return vector of io_file::Id integers, vector of ids of nodes who are parents of node with id node_id.
     */
-    std::vector<unsigned> GetParents(const unsigned& node_id);
+    std::vector<io_file::Id> GetParents(const io_file::Id& node_id);
 
     /**
      * @brief Erase all the records of the node with id node_id - records as a parent and as a child.
      * @param node_id Id of the node which is to be erased from the heirarchy manager.
      */
-    void RemoveNodeFromHierarchy(const unsigned& node_id);
+    void RemoveNodeFromHierarchy(const io_file::Id& node_id);
 
 private:
-    std::multimap<unsigned, unsigned> parent_child_multimap_;
+    std::multimap<io_file::Id, io_file::Id> parent_child_multimap_;
 };
 
 #endif // ATTRIBUTE_HIERARCHY_MANAGER_H
