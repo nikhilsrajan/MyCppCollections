@@ -48,11 +48,11 @@ std::vector<unsigned> Attribute_Hierarchy_Manager::GetChildren(const unsigned& n
 
 std::vector<unsigned> Attribute_Hierarchy_Manager::GetParents(const unsigned & node_id)
 {
-	std::vector<unsigned> parents_vec;
-	for (auto it = parent_child_multimap_.begin(); it != parent_child_multimap_.end(); ++it)
-		if (it->second == node_id)
-			parents_vec.emplace_back(it->first);
-	return parents_vec;
+    std::vector<unsigned> parents_vec;
+    for (auto it = parent_child_multimap_.begin(); it != parent_child_multimap_.end(); ++it)
+        if (it->second == node_id)
+            parents_vec.emplace_back(it->first);
+    return parents_vec;
 }
 
 void Attribute_Hierarchy_Manager::RemoveNodeFromHierarchy(const unsigned& node_id)

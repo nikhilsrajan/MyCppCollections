@@ -45,7 +45,7 @@ public:
     }
 
 private:
-	uint64_t node_id_;
+    uint64_t node_id_;
 };
 
 #endif // IO_NODE_H

@@ -73,12 +73,12 @@ public:
      */
     std::vector<unsigned> GetChildren(const unsigned& node_id);
 
-	/**
-	* @brief Get all the parents of the give node with id node_id as a vector of ids.
-	* @param node_id Id of the node whose list of parents is being returned.
-	* @return vector of unsigned integers, vector of ids of nodes who are parents of node with id node_id.
-	*/
-	std::vector<unsigned> GetParents(const unsigned& node_id);
+    /**
+    * @brief Get all the parents of the give node with id node_id as a vector of ids.
+    * @param node_id Id of the node whose list of parents is being returned.
+    * @return vector of unsigned integers, vector of ids of nodes who are parents of node with id node_id.
+    */
+    std::vector<unsigned> GetParents(const unsigned& node_id);
 
     /**
      * @brief Erase all the records of the node with id node_id - records as a parent and as a child.
