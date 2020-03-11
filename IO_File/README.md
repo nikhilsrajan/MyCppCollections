@@ -73,8 +73,12 @@ This is an optional parameter.
 
 #### Add attributes for the nodes
 ```
+file.SetAttribute<std::string>("Name", n0, "Alex");
 file.SetAttribute<int>("Employee Id", n0, 1);
 file.SetAttribute<double>("Salary", n0, 1000.0);
+file.SetAttribute<std::string>("Name", n1, "Anne");
+file.SetAttribute<std::string>("Name", n2, "Mindy");
+file.SetAttribute<std::string>("Name", n3, "Marx");
 ```
 
 #### Verification
