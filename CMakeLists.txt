@@ -16,3 +16,9 @@ add_executable(StopwatchTest
 target_link_libraries(StopwatchTest
     Stopwatch-static
 )
+
+# ---------- Announcer ----------
+
+add_executable(AnnouncerTest
+    Tests/AnnouncerTest.cpp
+)
