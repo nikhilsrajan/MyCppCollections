@@ -59,6 +59,13 @@ public:
         return it->second;
     }
 
+    void SetAsParentChild(const IO_Node& parent, const IO_Node& child);
+    void RemoveAsParentChild(const IO_Node& parent, const IO_Node& child);
+    bool HasChildren(const IO_Node& node);
+    bool HasParent(const IO_Node& node);
+    std::vector<IO_Node> GetChildren(const IO_Node& node);
+	std::vector<IO_Node> GetParents(const IO_Node& node);
+
     // To check if the attribute exists in the IO_File
     // Returns true if it exists, else false.
     bool AttributeExists(const std::string& attribute) {
@@ -103,7 +110,7 @@ public:
     // If the attribute doesn't already exist, the attribute would be created. The datatype
     // then specified would be fixed for the attribute. It cannot be changed later.
     template <class T>
-    bool AddAttribute(const std::string& attribute, const IO_Node& node, T value) {
+    bool SetAttribute(const std::string& attribute, const IO_Node& node, T value) {
         return attributes_manager_.AddNodeToAttribute(attribute, node.GetId(), value);
     }
     // Gets the value of the  attribute for a given node.
@@ -124,6 +131,7 @@ private:
     io_file::Id next_node_id_;
     std::map<io_file::Id, IO_Node> id_node_map_;
 
+    Attribute_Hierarchy_Manager hierarchy_manager_;
     Attributes_Manager attributes_manager_;
 
     io_file::Id AssignId_();
