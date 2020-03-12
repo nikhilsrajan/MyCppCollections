@@ -32,7 +32,8 @@ I could now edit the function ```now(void)``` to do other things other than just
 int main() {
     Announcer announce;
 
-    (announce << "This " << 15 << " the message " << 1.0 << " want to print.").now();
+    announce << "This " << 15 << " the message " << 1.0 << " want to print.";
+    announce.now();
 
     return 0;
 }
